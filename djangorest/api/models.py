@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from django.dispatch import receiver
 
+
 class Bucketlist(models.Model):
     """This class represents the bucketlist model."""
     name = models.CharField(max_length=255, blank=False, unique=True)
@@ -16,17 +17,17 @@ class Bucketlist(models.Model):
         return "{}".format(self.name)
 
 
-# class Item(models.Model):
-#     """This class represents the item model."""
-#     name = models.CharField(max_length=255, blank=False, unique=True)
-#     owner = models.ForeignKey('auth.User', related_name='items', on_delete=models.CASCADE)
-#     bucketlist = models.ForeignKey('Bucketlist', related_name='items', on_delete=models.CASCADE)
-#     date_created = models.DateTimeField(auto_now_add=True)
-#     date_modified = models.DateTimeField(auto_now=True)
+class Item(models.Model):
+    """This class represents the item model."""
+    name = models.CharField(max_length=255, blank=False, unique=True)
+    owner = models.ForeignKey('auth.User', related_name='items', on_delete=models.CASCADE)
+    bucketlist = models.ForeignKey('Bucketlist', related_name='items', on_delete=models.CASCADE)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
 
-#     def __str__(self):
-#         """Return a human readable representation of the model instance."""
-#         return "{}".format(self.name)    
+    def __str__(self):
+        """Return a human readable representation of the model instance."""
+        return "{}".format(self.name)    
 
 
 # This receiver handles token creation immediately a new user is created.
