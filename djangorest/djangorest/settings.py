@@ -25,7 +25,7 @@ SECRET_KEY = '421&*ivh-&en-75g-0wdfhs)i_m5n^i5x!1+td@9@k^@!moscm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'api',
     'rest_framework.authtoken',
     'rest_framework_docs',
+    'rest_registration',
 ]
 
 MIDDLEWARE = [
@@ -54,9 +55,9 @@ MIDDLEWARE = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.TokenAuthentication',
@@ -132,3 +133,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+REST_REGISTRATION = {
+    'REGISTER_VERIFICATION_ENABLED': False,
+
+    'RESET_PASSWORD_VERIFICATION_URL': '/reset-password/',
+
+    'REGISTER_EMAIL_VERIFICATION_ENABLED': False,
+
+    'VERIFICATION_FROM_EMAIL': 'no-reply@example.com',
+
+    'PROFILE_SERIALIZER_CLASS': (
+        'api.serializers.UserSerializer'),
+}
